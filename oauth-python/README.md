@@ -15,8 +15,17 @@ This code is presented as-is, with no warranties or support.
 
 ## Prep
 
-Setup a python virtual environment and copy `oauth.py` and `requirements.txt`
-there. Run `pip install -r requirements.txt`
+Setup a python virtual environment.
+
+```
+mkdir oauth-python
+python -m venv oauth-python
+cd oauth-python
+source bin/activate
+```
+
+Copy `oauth.py` and `requirements.txt` there. Run
+`pip install -r requirements.txt`
 
 ## Registering the OAuth Client App
 
