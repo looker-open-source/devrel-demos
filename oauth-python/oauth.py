@@ -25,15 +25,27 @@ import base64
 import hashlib
 import secrets
 import pprint
+import sys # Added for stderr and exit
 
-# --- Configuration (replace with your actual values) ---
-CLIENT_ID = 'oauth2python'
+# --- Configuration ---
+# Load CLIENT_ID from environment variable OAUTH_CLIENT_ID
+# If not set, print an error to stderr and exit.
+CLIENT_ID = os.getenv('OAUTH_CLIENT_ID')
+if CLIENT_ID is None:
+    sys.stderr.write("Error: OAUTH_CLIENT_ID environment variable not set.\n")
+    sys.stderr.write("Please set it before running the script.\n")
+    sys.stderr.write("Example: export OAUTH_CLIENT_ID='your_actual_client_id'\n")
+    sys.exit(1)
+
 AUTHORIZATION_BASE_URL = 'https://sandbox.looker-devrel.com/auth'
 TOKEN_URL = 'https://sandbox.looker-devrel.com/api/token'
-REDIRECT_PORT=8080
+REDIRECT_PORT = 8080 # Define port before using it in REDIRECT_URI
 REDIRECT_URI = f'http://localhost:{REDIRECT_PORT}/callback' # Must be registered with your provider
 SCOPES = ['cors_api'] # Your desired scopes
 TOKEN_FILE = 'oauth_tokens.json'
+# Example of a previous hardcoded CLIENT_ID:
+# CLIENT_ID = 'oauth2python'
+
 
 # --- PKCE Generation ---
 def generate_pkce_pair():
@@ -70,7 +82,7 @@ class OAuthCallbackHandler(BaseHTTPRequestHandler):
             self.send_response(400)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
-            self.wfile.write(f"Authorization failed: {error} - {error_description}")
+            self.wfile.write(f"Authorization failed: {error} - {error_description}".encode('utf-8'))
         else:
             self.send_response(400)
             self.send_header('Content-type', 'text/html')
@@ -208,10 +220,14 @@ def get_authorized_session():
 
 # --- Main Program Logic ---
 def main():
+    """Orchestrates the OAuth 2.0 authorization flow and makes a sample API call."""
     session = get_authorized_session()
     if session:
         # Example API call (replace with your actual API endpoint)
         try:
+            # The Looker API (/api/4.0/user) expects an Authorization header in the format: "token <access_token>".
+            # requests-oauthlib's OAuth2Session by default (and following OAuth2 standards) uses "Bearer <access_token>".
+            # Therefore, we manually set the Authorization header here to ensure compatibility.
             session.headers['Authorization'] = f"token {load_tokens()['access_token']}"
             response = session.get('https://sandbox.looker-devrel.com/api/4.0/user?fields=id,display_name,email')
             response.raise_for_status() # Raise an exception for HTTP errors
