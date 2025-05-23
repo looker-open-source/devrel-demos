@@ -25,18 +25,9 @@ import base64
 import hashlib
 import secrets
 import pprint
-import sys # Added for stderr and exit
 
 # --- Configuration ---
-# Load CLIENT_ID from environment variable OAUTH_CLIENT_ID
-# If not set, print an error to stderr and exit.
-CLIENT_ID = os.getenv('OAUTH_CLIENT_ID')
-if CLIENT_ID is None:
-    sys.stderr.write("Error: OAUTH_CLIENT_ID environment variable not set.\n")
-    sys.stderr.write("Please set it before running the script.\n")
-    sys.stderr.write("Example: export OAUTH_CLIENT_ID='your_actual_client_id'\n")
-    sys.exit(1)
-
+CLIENT_ID = 'oauth2python'
 AUTHORIZATION_BASE_URL = 'https://sandbox.looker-devrel.com/auth'
 TOKEN_URL = 'https://sandbox.looker-devrel.com/api/token'
 REDIRECT_PORT = 8080 # Define port before using it in REDIRECT_URI
@@ -222,10 +213,6 @@ def main():
     if session:
         # Example API call (replace with your actual API endpoint)
         try:
-            # The Looker API (/api/4.0/user) expects an Authorization header in the format: "token <access_token>".
-            # requests-oauthlib's OAuth2Session by default (and following OAuth2 standards) uses "Bearer <access_token>".
-            # Therefore, we manually set the Authorization header here to ensure compatibility.
-            session.headers['Authorization'] = f"token {load_tokens()['access_token']}"
             response = session.get('https://sandbox.looker-devrel.com/api/4.0/user?fields=id,display_name,email')
             response.raise_for_status() # Raise an exception for HTTP errors
             print("API call successful!")
