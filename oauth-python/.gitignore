@@ -1,0 +1,6 @@
+# OAuth tokens file
+oauth_tokens.json
+
+# Python cache
+__pycache__/
+*.py[cod]
