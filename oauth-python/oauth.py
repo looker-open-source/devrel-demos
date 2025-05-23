@@ -43,9 +43,6 @@ REDIRECT_PORT = 8080 # Define port before using it in REDIRECT_URI
 REDIRECT_URI = f'http://localhost:{REDIRECT_PORT}/callback' # Must be registered with your provider
 SCOPES = ['cors_api'] # Your desired scopes
 TOKEN_FILE = 'oauth_tokens.json'
-# Example of a previous hardcoded CLIENT_ID:
-# CLIENT_ID = 'oauth2python'
-
 
 # --- PKCE Generation ---
 def generate_pkce_pair():
