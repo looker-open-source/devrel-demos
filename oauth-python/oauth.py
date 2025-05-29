@@ -214,6 +214,7 @@ def main():
     session = get_authorized_session()
     if session:
         # Example API call (replace with your actual API endpoint)
+        # The token is available as session.token
         try:
             response = session.get(f'{LOOKER_API_URL}/api/4.0/user?fields=id,display_name,email')
             response.raise_for_status() # Raise an exception for HTTP errors
