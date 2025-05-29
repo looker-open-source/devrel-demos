@@ -53,24 +53,26 @@ Run that. This only needs to be done once.
 The configuration all takes place at the top of python program.
 
 ```
+# --- Configuration ---
 CLIENT_ID = 'oauth2python'
-AUTHORIZATION_BASE_URL = 'https://sandbox.looker-devrel.com/auth'
-TOKEN_URL = 'https://sandbox.looker-devrel.com/api/token'
-REDIRECT_PORT=8080
+LOOKER_URL = 'https://sandbox.looker-devrel.com'
+AUTHORIZATION_BASE_URL = f'{LOOKER_URL}/auth'
+LOOKER_API_URL = 'https://sandbox.looker-devrel.com'
+TOKEN_URL = f'{LOOKER_API_URL}/api/token'
+REDIRECT_PORT = 8080 # Define port before using it in REDIRECT_URI
 REDIRECT_URI = f'http://localhost:{REDIRECT_PORT}/callback' # Must be registered with your provider
-SCOPES = ['cors_api']
+SCOPES = ['cors_api'] # Your desired scopes
 TOKEN_FILE = 'oauth_tokens.json'
 ```
 
 `CLIENT_ID` should be set to the `client_guid` used in the API call
 above.
 
-`AUTHORIZATION_BASE_URL` should be set to the url of your Looker server
-with `/auth` appended. This is the path to the Looker web server, which
-might have port `9999` as part of the url.
+`LOOKER_URL` should be set to the url of your Looker server. This is the path
+to the Looker web server, which might have port `9999` as part of the url.
 
-`TOKEN_URL` is set to the url of the Looker API server with `/api/token`
-appended. It might have port `19999` as part of the url.
+`LOOKER_API_URL` is set to the url of the Looker API server. It might have
+port `19999` as part of the url.
 
 `REDIRECT_PORT` is the port that will be opened in a local webserver. If
 `REDIRECT_PORT` 8080 is in use, choose another number from 1024 to 65,535.
