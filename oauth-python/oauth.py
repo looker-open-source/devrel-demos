@@ -28,8 +28,10 @@ import pprint
 
 # --- Configuration ---
 CLIENT_ID = 'oauth2python'
-AUTHORIZATION_BASE_URL = 'https://sandbox.looker-devrel.com/auth'
-TOKEN_URL = 'https://sandbox.looker-devrel.com/api/token'
+LOOKER_URL = 'https://sandbox.looker-devrel.com'
+AUTHORIZATION_BASE_URL = f'{LOOKER_URL}/auth'
+LOOKER_API_URL = 'https://sandbox.looker-devrel.com'
+TOKEN_URL = f'{LOOKER_API_URL}/api/token'
 REDIRECT_PORT = 8080 # Define port before using it in REDIRECT_URI
 REDIRECT_URI = f'http://localhost:{REDIRECT_PORT}/callback' # Must be registered with your provider
 SCOPES = ['cors_api'] # Your desired scopes
@@ -213,7 +215,7 @@ def main():
     if session:
         # Example API call (replace with your actual API endpoint)
         try:
-            response = session.get('https://sandbox.looker-devrel.com/api/4.0/user?fields=id,display_name,email')
+            response = session.get(f'{LOOKER_API_URL}/api/4.0/user?fields=id,display_name,email')
             response.raise_for_status() # Raise an exception for HTTP errors
             print("API call successful!")
             pprint.pprint(response.json())
