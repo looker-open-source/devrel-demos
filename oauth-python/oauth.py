@@ -105,7 +105,7 @@ class OAuthCallbackServer(HTTPServer):
   auth_code: Optional[str]
   auth_error: Optional[str]
 
-  def __init__(self, server_address: Tuple[str, int], RequestHandlerClass: Any):
+  def __init__(self, server_address: Tuple[str, int], RequestHandlerClass: Type[BaseHTTPRequestHandler]):
     super().__init__(server_address, RequestHandlerClass)
     self.auth_code = None
     self.auth_error = None
