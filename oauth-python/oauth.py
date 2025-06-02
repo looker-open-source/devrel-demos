@@ -23,7 +23,7 @@ import base64
 import hashlib
 import secrets
 import pprint
-from typing import Dict, Optional, Tuple, Any, List
+from typing import Dict, Optional, Tuple, Any, List, Type
 import webbrowser
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import requests
