@@ -118,7 +118,7 @@ def start_local_server_and_wait_for_code() -> OAuthCallbackServer:
   host: Optional[str] = urllib.parse.urlparse(REDIRECT_URI).hostname
   # Ensure host is not None, though practically it should always be there for http/https URLs
   if host is None:
-    raise ValueError("Could not parse hostname from REDIRECT_URI")
+    raise ValueError(f"Could not parse hostname from REDIRECT_URI: {REDIRECT_URI}")
   port: int = REDIRECT_PORT
   server_address: Tuple[str, int] = (host, port)
   httpd = OAuthCallbackServer(server_address, OAuthCallbackHandler)
@@ -135,8 +135,11 @@ def load_tokens() -> Optional[Dict[str, Any]]:
   """load_tokens"""
   if os.path.exists(TOKEN_FILE):
     with open(TOKEN_FILE, "r", encoding='utf-8') as f:
-      tokens: Dict[str, Any] = json.load(f)
-      return tokens
+      try:
+        tokens: Dict[str, Any] = json.load(f)
+        return tokens
+      except json.JSONDecodeError as e:
+        print(f"Error decoding token file: {e}")
   return None
 
 
@@ -180,6 +183,7 @@ def refresh_access_token(
     return None
 
 
+# pylint: disable-next=too-many-return-statements
 def get_authorized_session() -> Optional[OAuth2Session]:
   """get_authorized_session"""
 
@@ -261,9 +265,12 @@ def get_authorized_session() -> Optional[OAuth2Session]:
         # client_secret=CLIENT_SECRET # For public clients, this is usually NOT included
         include_client_id=True,  # Crucial for PKCE
       )
-      save_tokens(token_response)
-      print("Tokens obtained and saved successfully.")
-      return oauth
+      if token_response:
+        save_tokens(token_response)
+        print("Tokens obtained and saved successfully.")
+        return oauth
+      print("Failed to obtain tokens.")
+      return None
     except requests.exceptions.RequestException as e:
       print(f"Error exchanging code for tokens: {e}")
       if hasattr(e, "response") and e.response is not None:
