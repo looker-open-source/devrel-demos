@@ -105,7 +105,8 @@ class OAuthCallbackServer(HTTPServer):
   auth_code: Optional[str]
   auth_error: Optional[str]
 
-  def __init__(self, server_address: Tuple[str, int], RequestHandlerClass: Type[BaseHTTPRequestHandler]):
+  def __init__(self, server_address: Tuple[str, int],
+               RequestHandlerClass: Type[BaseHTTPRequestHandler]):
     super().__init__(server_address, RequestHandlerClass)
     self.auth_code = None
     self.auth_error = None
@@ -155,12 +156,15 @@ def refresh_access_token(
   """refresh_access_token"""
 
   print("Access token expired, refreshing...")
+  refresh_token: Optional[str] = tokens.get("refresh_token")
+  if refresh_token is None:
+    print("No refresh token found")
+    return None
+
   try:
     data: Dict[str, str] = {
       "grant_type": "refresh_token",
-      "refresh_token": str(
-        tokens["refresh_token"]
-      ),  # Ensure refresh_token is string
+      "refresh_token": refresh_token,
       "client_id": CLIENT_ID,
       # 'client_secret': CLIENT_SECRET # For public clients, this is usually NOT included
     }
