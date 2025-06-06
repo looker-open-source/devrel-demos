@@ -150,6 +150,7 @@ def get_authorized_session()
     # Create the authentication request
     code_verifier, code_challenge = generate_pkce_pair()
     $session_store[:code_verifier] = code_verifier
+    $session_store[:state] = SecureRandom.urlsafe_base64(64)
 
     # Build the authorization URL
     auth_params = {
@@ -157,7 +158,7 @@ def get_authorized_session()
       client_id: CLIENT_ID,
       redirect_uri: REDIRECT_URI,
       scope: SCOPE,
-      state: '12345_just_a_demo_state', # A random string for security
+      state: $session_store[:state], # A random string for security
       code_challenge_method: 'S256',
       code_challenge: code_challenge
     }
@@ -228,8 +229,9 @@ def configure_server(auth_uri)
     # Extract the authorization code from the query parameters
     code = req.query['code']
     error = req.query['error']
+    state = req.query['state']
 
-    if code
+    if code and state == $session_store[:state]
       $session_store[:auth_code] = code
       res.status = 200
       res.body = "Authorization successful! You can close this tab."
