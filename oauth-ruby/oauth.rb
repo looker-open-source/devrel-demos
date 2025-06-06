@@ -100,6 +100,11 @@ def refresh_access_token(tokens)
 
     token_response = http.request(request)
     new_tokens = JSON.parse(token_response.body,{:symbolize_names => true})
+    if new_tokens[:error]
+      puts "Error refreshing tokens"
+      puts new_tokens
+      return nil
+    end
     save_tokens(new_tokens)
     puts "Token refreshed successfully"
     return new_tokens
@@ -109,7 +114,7 @@ def refresh_access_token(tokens)
   end
 end
 
-def get_authorized_session(server)
+def get_authorized_session()
   tokens = load_tokens()
 
   if tokens and tokens[:error]
@@ -126,7 +131,6 @@ def get_authorized_session(server)
       if expiration < (Time.now + 300)
         puts "Access token is expired"
         tokens = refresh_access_token(tokens)
-        $session_store[:access_token] = tokens[:access_token]
       end
       if not tokens
         puts "Failed to refresh token. Will attempt full reauthorization"
@@ -142,8 +146,27 @@ def get_authorized_session(server)
   end
 
   if !tokens
-    puts "Initializing new Authoriztion flow."
+    puts "Initializing new Authorization flow."
+    # Create the authentication request
+    code_verifier, code_challenge = generate_pkce_pair()
+    $session_store[:code_verifier] = code_verifier
+
+    # Build the authorization URL
+    auth_params = {
+      response_type: 'code',
+      client_id: CLIENT_ID,
+      redirect_uri: REDIRECT_URI,
+      scope: SCOPE,
+      state: '12345_just_a_demo_state', # A random string for security
+      code_challenge_method: 'S256',
+      code_challenge: code_challenge
+    }
+
+    auth_uri = URI(AUTHORIZATION_BASE_URL)
+    auth_uri.query = URI.encode_www_form(auth_params)
+
     puts "🚀 Starting server on http://localhost:#{REDIRECT_PORT}"
+    server = configure_server(auth_uri)
     server.start
 
     if $session_store[:auth_error]
@@ -188,31 +211,12 @@ def get_authorized_session(server)
   end
 end
 
-def configure_server()
+def configure_server(auth_uri)
   # Create a new WEBrick server
   server = WEBrick::HTTPServer.new(
     Port: REDIRECT_PORT,
     StartCallback: -> {
-      # Create the authentication request
-
-      code_verifier, code_challenge = generate_pkce_pair()
-      $session_store[:code_verifier] = code_verifier
-
-      # Build the authorization URL
-      auth_params = {
-        response_type: 'code',
-        client_id: CLIENT_ID,
-        redirect_uri: REDIRECT_URI,
-        scope: SCOPE,
-        state: '12345_just_a_demo_state', # A random string for security
-        code_challenge_method: 'S256',
-        code_challenge: code_challenge
-      }
-
-      auth_uri = URI(AUTHORIZATION_BASE_URL)
-      auth_uri.query = URI.encode_www_form(auth_params)
-
-      # Step 3: direct the user's browser to the Looker login page
+      # direct the user's browser to the Looker login page
       Launchy.open(auth_uri.to_s)
     }
   )
@@ -244,8 +248,7 @@ def configure_server()
   return server
 end
 
-server = configure_server()
-get_authorized_session(server)
+get_authorized_session()
 
 access_token = $session_store[:access_token]
 
@@ -262,7 +265,7 @@ user_data = JSON.parse(user_response.body)
 
 # Display the results
 puts """
-✅ Authentication Successful!>
+✅ Authentication Successful!
 Your access token has been retrieved and used to call the API.
 
 Access Token:
