@@ -18,6 +18,7 @@ require 'json'
 require 'uri'
 require 'pkce_challenge'
 require 'launchy'
+require 'time'
 
 # --- Configuration ---
 CLIENT_ID = 'oauth2ruby'
@@ -127,11 +128,7 @@ def get_authorized_session()
 
       if tokens[:expires_at].is_a? String
         # Date is written out like '2002-01-01 00:00:00 -0500'
-        (day, time, tz) = tokens[:expires_at].split(' ')
-        day_parts = day.split('-')
-        time_parts = time.split(':')
-        date_time_parts = day_parts + time_parts + [tz]
-        expiration = Time.new(*date_time_parts).to_i
+        expiration = Time.parse(tokens[:expires_at]).to_i
       else
         # Date is seconds since epoch
         expiration = tokens[:expires_at].to_i
