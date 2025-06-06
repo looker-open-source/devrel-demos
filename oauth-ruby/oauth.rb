@@ -231,7 +231,7 @@ def configure_server(auth_uri)
     error = req.query['error']
     state = req.query['state']
 
-    if code and state == $session_store[:state]
+    if code and $session_store[:state] and state == $session_store[:state]
       $session_store[:auth_code] = code
       res.status = 200
       res.body = "Authorization successful! You can close this tab."
