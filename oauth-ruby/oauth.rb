@@ -18,6 +18,7 @@ require 'json'
 require 'uri'
 require 'pkce_challenge'
 require 'launchy'
+require 'time'
 
 # --- Configuration ---
 CLIENT_ID = 'oauth2ruby'
@@ -54,7 +55,7 @@ def load_tokens()
   return nil unless File.exist?(TOKEN_FILE)
   s = File.stat(TOKEN_FILE)
   if !(s.mode.to_s(8)[3..5] == "600")
-    say_error "#{TOKEN_FILE} mode is #{s.mode.to_s(8)[3..5]}. It must be 600. Ignoring."
+    puts "#{TOKEN_FILE} mode is #{s.mode.to_s(8)[3..5]}. It must be 600. Ignoring."
     return nil
   end
   token_data = nil
@@ -70,7 +71,7 @@ end
 
 def save_tokens(tokens)
   if tokens[:expires_in] and not tokens[:expires_at]
-    tokens[:expires_at] = Time.now + tokens[:expires_in]
+    tokens[:expires_at] = Time.now.to_i + tokens[:expires_in].to_i
   end
   file = nil
   begin
@@ -123,12 +124,21 @@ def get_authorized_session()
 
   if tokens
     if tokens[:expires_at]
-      (day, time, tz) = tokens[:expires_at].split(' ')
-      day_parts = day.split('-')
-      time_parts = time.split(':')
-      date_time_parts = day_parts + time_parts + [tz]
-      expiration = Time.new(*date_time_parts)
-      if expiration < (Time.now + 300)
+      expiration = 0
+
+      if tokens[:expires_at].is_a? String
+        # Date is written out like '2002-01-01 00:00:00 -0500'
+        begin
+          expiration = Time.parse(tokens[:expires_at]).to_i
+        rescue ArgumentError => e
+          puts "Warning: Could not parse date string '#{tokens[:expires_at]}': #{e.message}. Treating as expired."
+          expiration = 0 # Default to expired, forcing a refresh
+        end
+      else
+        # Date is seconds since epoch
+        expiration = tokens[:expires_at].to_i
+      end
+      if expiration < (Time.now.to_i + 300)
         puts "Access token is expired"
         tokens = refresh_access_token(tokens)
       end
