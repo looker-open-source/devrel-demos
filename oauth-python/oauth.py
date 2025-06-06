@@ -73,6 +73,10 @@ class OAuthCallbackHandler(BaseHTTPRequestHandler):
     parsed_url: urllib.parse.ParseResult = urllib.parse.urlparse(self.path)
     query_params: Dict[str, List[str]] = urllib.parse.parse_qs(parsed_url.query)
 
+    if "state" in query_params:
+      state: str = query_params["state"][0]
+      self.server.state = state
+
     if "code" in query_params:
       auth_code: str = query_params["code"][0]
       self.server.auth_code = auth_code
@@ -104,12 +108,14 @@ class OAuthCallbackServer(HTTPServer):
 
   auth_code: Optional[str]
   auth_error: Optional[str]
+  state: Optional[str]
 
   def __init__(self, server_address: Tuple[str, int],
                RequestHandlerClass: Type[BaseHTTPRequestHandler]):
     super().__init__(server_address, RequestHandlerClass)
     self.auth_code = None
     self.auth_error = None
+    self.state = None
 
 
 def start_local_server_and_wait_for_code() -> OAuthCallbackServer:
@@ -220,7 +226,6 @@ def get_authorized_session() -> Optional[OAuth2Session]:
 
     # Create the authorization URL with PKCE parameters
     authorization_url: str
-    # pylint: disable-next=unused-variable
     state: str
     authorization_url, state = oauth.authorization_url(
       AUTHORIZATION_BASE_URL,
@@ -252,6 +257,10 @@ def get_authorized_session() -> Optional[OAuth2Session]:
       print(
           "Failed to receive authorization code."
       )  # Removed "within timeout" as serve_forever blocks.
+      return None
+
+    if state != httpd.state:
+      print("State of response did not match state sent")
       return None
 
     print("\nReceived authorization code, exchanging for tokens...")
