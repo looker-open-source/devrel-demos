@@ -20,7 +20,7 @@ require 'pkce_challenge'
 require 'launchy'
 
 # --- Configuration ---
-CLIENT_ID = 'oauth2python'
+CLIENT_ID = 'oauth2ruby'
 LOOKER_URL = 'https://sandbox.looker-devrel.com'
 AUTHORIZATION_BASE_URL = "#{LOOKER_URL}/auth"
 LOOKER_API_URL = 'https://sandbox.looker-devrel.com'
