@@ -128,7 +128,12 @@ def get_authorized_session()
 
       if tokens[:expires_at].is_a? String
         # Date is written out like '2002-01-01 00:00:00 -0500'
-        expiration = Time.parse(tokens[:expires_at]).to_i
+        begin
+          expiration = Time.parse(tokens[:expires_at]).to_i
+        rescue ArgumentError => e
+          puts "Warning: Could not parse date string '#{tokens[:expires_at]}': #{e.message}. Treating as expired."
+          expiration = 0 # Default to expired, forcing a refresh
+        end
       else
         # Date is seconds since epoch
         expiration = tokens[:expires_at].to_i
