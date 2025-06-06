@@ -1,4 +1,16 @@
-# oauth.rb
+#   Copyright 2025 Google, LLC
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
 
 require 'webrick'
 require 'net/http'
@@ -8,25 +20,15 @@ require 'pkce_challenge'
 require 'launchy'
 
 # --- Configuration ---
-# 1. Replace with the Client ID from your Looker OAuth Web Application client
 CLIENT_ID = 'oauth2python'
-
-# 2. Replace with your Looker instance URL (e.g., https://yourcompany.cloud.looker.com)
-#    The API URL may have a different port like :19999
 LOOKER_URL = 'https://sandbox.looker-devrel.com'
+AUTHORIZATION_BASE_URL = "#{LOOKER_URL}/auth"
 LOOKER_API_URL = 'https://sandbox.looker-devrel.com'
-
-AUTHORIZATION_URL = "#{LOOKER_URL}/auth"
 TOKEN_URL = "#{LOOKER_API_URL}/api/token"
-
-# 3. The redirect URI must match what you configured in your GCP OAuth client
 REDIRECT_PORT = 8080
-REDIRECT_SERVER = "http://localhost:#{REDIRECT_PORT}"
-REDIRECT_URI = "#{REDIRECT_SERVER}/callback"
-
-# 4. Define the API scope for the permissions you want to request
-#    'cors_apu' allows us to use the api. It is the only scope curerently defined
+REDIRECT_URI = "http://localhost:#{REDIRECT_PORT}/callback"
 SCOPE = 'cors_api'
+TOKEN_FILE = 'oauth_tokens.json'
 # --- End Configuration ---
 
 
@@ -39,90 +41,215 @@ def base64_url_encode(str)
   Base64.urlsafe_encode64(str, padding: false)
 end
 
-# Create a new WEBrick server
-server = WEBrick::HTTPServer.new(
-  Port: REDIRECT_PORT,
-  StartCallback: -> {
-    # Create the authentication request
+# Generate the PKCE code verifier and challenge
+def generate_pkce_pair()
+  pkce = PkceChallenge.challenge(char_length: 128)
+  code_verifier = pkce.code_verifier
+  code_challenge = pkce.code_challenge
 
-    # Step 1: Generate the PKCE code verifier and challenge
-    pkce = PkceChallenge.challenge(char_length: 128)
-    $session_store[:code_verifier] = pkce.code_verifier
+  return code_verifier, code_challenge
+end
 
-    code_challenge = pkce.code_challenge
+def load_tokens()
+  return nil unless File.exist?(TOKEN_FILE)
+  s = File.stat(TOKEN_FILE)
+  if !(s.mode.to_s(8)[3..5] == "600")
+    say_error "#{TOKEN_FILE} mode is #{s.mode.to_s(8)[3..5]}. It must be 600. Ignoring."
+    return nil
+  end
+  token_data = nil
+  file = nil
+  begin
+    file = File.open(TOKEN_FILE)
+    token_data = JSON.parse(file.read,{:symbolize_names => true})
+  ensure
+    file.close if file
+  end
+  token_data
+end
 
-    # Step 2: Build the authorization URL
-    auth_params = {
-      response_type: 'code',
-      client_id: CLIENT_ID,
-      redirect_uri: REDIRECT_URI,
-      scope: SCOPE,
-      state: '12345_just_a_demo_state', # A random string for security
-      code_challenge_method: 'S256',
-      code_challenge: code_challenge
+def save_tokens(tokens)
+  if tokens[:expires_in] and not tokens[:expires_at]
+    tokens[:expires_at] = Time.now + tokens[:expires_in]
+  end
+  file = nil
+  begin
+    file = File.new(TOKEN_FILE, "wt")
+    file.chmod(0600)
+    file.write JSON.pretty_generate(tokens)
+  ensure
+    file.close if file
+  end
+end
+
+def refresh_access_token(tokens)
+  puts "Access token expired, refreshing..."
+  begin
+    data = {
+      :grant_type => 'refresh_token',
+      :refresh_token => tokens[:refresh_token],
+      :client_id => CLIENT_ID
     }
 
-    auth_uri = URI(AUTHORIZATION_URL)
-    auth_uri.query = URI.encode_www_form(auth_params)
+    token_uri = URI(TOKEN_URL)
 
-    # Step 3: direct the user's browser to the Looker login page
-    Launchy.open(auth_uri.to_s)
-  }
-)
+    http = Net::HTTP.new(token_uri.host, token_uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Post.new(token_uri.request_uri)
+    request.set_form_data(data)
 
-
-# Mount a handler for the callback URI ('/callback')
-# This is where Looker redirects after the user authenticates.
-server.mount_proc '/callback' do |req, res|
-  # Step 4: Extract the authorization code from the query parameters
-  auth_code = req.query['code']
-
-  if auth_code.nil?
-    res.status = 400
-    res.body = "Error: No authorization code received."
-  else
-    $session_store[:auth_code] = auth_code
-    res.status = 200
-    res.body = "Authorization successful! You can close this tab."
+    token_response = http.request(request)
+    new_tokens = JSON.parse(token_response.body,{:symbolize_names => true})
+    save_tokens(new_tokens)
+    puts "Token refreshed successfully"
+    return new_tokens
+  rescue Exception => e
+    puts "Error refreshing token: #{e}"
+    return nil
   end
-  server.shutdown
 end
 
+def get_authorized_session(server)
+  tokens = load_tokens()
 
+  if tokens and tokens[:error]
+    tokens = nil
+  end
 
-# Start the server and handle shutdown
-trap('INT') { server.shutdown }
+  if tokens
+    if tokens[:expires_at]
+      (day, time, tz) = tokens[:expires_at].split(' ')
+      day_parts = day.split('-')
+      time_parts = time.split(':')
+      date_time_parts = day_parts + time_parts + [tz]
+      expiration = Time.new(*date_time_parts)
+      if expiration < (Time.now + 300)
+        puts "Access token is expired"
+        tokens = refresh_access_token(tokens)
+        $session_store[:access_token] = tokens[:access_token]
+      end
+      if not tokens
+        puts "Failed to refresh token. Will attempt full reauthorization"
+        tokens = nil
+      else
+        # Update session with new tokens
+        $session_store[:access_token] = tokens[:access_token]
+      end
+    elsif tokens[:access_token]
+      puts "Using existing access token."
+      $session_store[:access_token] = tokens[:access_token]
+    end
+  end
 
-puts "🚀 Starting server on http://localhost:8080"
-server.start
+  if !tokens
+    puts "Initializing new Authoriztion flow."
+    puts "🚀 Starting server on http://localhost:#{REDIRECT_PORT}"
+    server.start
 
-# Step 5: Exchange the authorization code for an access token
-token_uri = URI(TOKEN_URL)
+    if $session_store[:auth_error]
+      puts "Authorization failed: #{$session_store[:auth_error]}"
+      return nil
+    end
 
-token_request_body = {
-  grant_type: 'authorization_code',
-  client_id: CLIENT_ID,
-  redirect_uri: REDIRECT_URI,
-  code: $session_store[:auth_code],
-  code_verifier: $session_store[:code_verifier] # Send the original verifier
-}
+    if not $session_store[:auth_code]
+      puts "Failed to receive authorization code within timeout."
+      return nil
+    end
 
-# Make the POST request to the token endpoint
-http = Net::HTTP.new(token_uri.host, token_uri.port)
-http.use_ssl = true
-request = Net::HTTP::Post.new(token_uri.request_uri)
-request.set_form_data(token_request_body)
+    puts "Received Authoriztion code, exchanging for tokens..."
+    begin
+      token_uri = URI(TOKEN_URL)
 
-token_response = http.request(request)
-token_data = JSON.parse(token_response.body)
+      token_request_body = {
+        grant_type: 'authorization_code',
+        client_id: CLIENT_ID,
+        redirect_uri: REDIRECT_URI,
+        code: $session_store[:auth_code],
+        code_verifier: $session_store[:code_verifier] # Send the original verifier
+      }
 
-if token_data['error']
-  puts "Error getting token:#{JSON.pretty_generate(token_data)}"
+      # Make the POST request to the token endpoint
+      http = Net::HTTP.new(token_uri.host, token_uri.port)
+      http.use_ssl = true
+      request = Net::HTTP::Post.new(token_uri.request_uri)
+      request.set_form_data(token_request_body)
+
+      token_response = http.request(request)
+      token_data = JSON.parse(token_response.body,{:symbolize_names => true})
+
+      save_tokens(token_data)
+
+      if token_data[:error]
+        puts "Error getting token:#{JSON.pretty_generate(token_data)}"
+      end
+
+      $session_store[:access_token] = token_data[:access_token]
+    end
+  end
 end
 
-access_token = token_data['access_token']
+def configure_server()
+  # Create a new WEBrick server
+  server = WEBrick::HTTPServer.new(
+    Port: REDIRECT_PORT,
+    StartCallback: -> {
+      # Create the authentication request
 
-# Step 6: Use the access token to make an authenticated API call
+      code_verifier, code_challenge = generate_pkce_pair()
+      $session_store[:code_verifier] = code_verifier
+
+      # Build the authorization URL
+      auth_params = {
+        response_type: 'code',
+        client_id: CLIENT_ID,
+        redirect_uri: REDIRECT_URI,
+        scope: SCOPE,
+        state: '12345_just_a_demo_state', # A random string for security
+        code_challenge_method: 'S256',
+        code_challenge: code_challenge
+      }
+
+      auth_uri = URI(AUTHORIZATION_BASE_URL)
+      auth_uri.query = URI.encode_www_form(auth_params)
+
+      # Step 3: direct the user's browser to the Looker login page
+      Launchy.open(auth_uri.to_s)
+    }
+  )
+
+
+  # Mount a handler for the callback URI ('/callback')
+  # This is where Looker redirects after the user authenticates.
+  server.mount_proc '/callback' do |req, res|
+    # Extract the authorization code from the query parameters
+    code = req.query['code']
+    error = req.query['error']
+
+    if code
+      $session_store[:auth_code] = code
+      res.status = 200
+      res.body = "Authorization successful! You can close this tab."
+    elsif error
+      error_description = req.query.get('error_description', '')
+      $session_store[:auth_error] = "Error: #{error}, Description: #{error_description}"
+      res.status = 400
+      res.body = "Error: Authorization failed: #{error} - #{error_description}"
+    else
+      res.status = 400
+      res.body = "Error: Authorization failed or code not found."
+    end
+    server.shutdown
+  end
+
+  return server
+end
+
+server = configure_server()
+get_authorized_session(server)
+
+access_token = $session_store[:access_token]
+
+# Use the access token to make an authenticated API call
 user_api_uri = URI("#{LOOKER_API_URL}/api/4.0/user?fields=id,display_name,email")
 
 user_request = Net::HTTP::Get.new(user_api_uri.request_uri)
