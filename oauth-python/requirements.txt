@@ -1,1 +1,5 @@
 requests_oauthlib==2.0.0
+mypy
+types-requests
+types-requests-oauthlib
+pylint
