@@ -63,7 +63,7 @@ func loadTokens() (*oauth2.Token, error) {
 }
 
 func saveTokens(token *oauth2.Token) error {
-	file, err := os.Create(tokenFile)
+file, err := os.OpenFile(tokenFile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
 	if err != nil {
 		return err
 	}
