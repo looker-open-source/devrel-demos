@@ -20,13 +20,13 @@ import (
 
 // --- Configuration ---
 const (
-	clientID            = "oauth2go"
-	lookerURL           = "https://sandbox.looker-devrel.com"
+	clientID             = "oauth2go"
+	lookerURL            = "https://sandbox.looker-devrel.com"
 	authorizationBaseURL = lookerURL + "/auth"
-	tokenURL            = lookerURL + "/api/token"
-	redirectPort        = "8080"
-	redirectURL         = "http://localhost:" + redirectPort + "/callback"
-	tokenFile           = "oauth-go/oauth_tokens.json"
+	tokenURL             = lookerURL + "/api/token"
+	redirectPort         = "8080"
+	redirectURL          = "http://localhost:" + redirectPort + "/callback"
+	tokenFile            = "./oauth_tokens.json"
 )
 
 var (
@@ -186,7 +186,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("API call failed: %v", err)
 	}
-	defer resp.Body..Close()
+	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
