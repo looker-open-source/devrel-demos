@@ -7,7 +7,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -91,7 +91,11 @@ mux.HandleFunc("/callback", func(w http.ResponseWriter, r *http.Request) {
 		codeChan <- code
 		go func() {
 			time.Sleep(1 * time.Second)
-			server.Shutdown(context.Background())
+			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+			defer cancel()
+			if err := server.Shutdown(ctx); err != nil {
+				log.Printf("HTTP server Shutdown error: %v", err)
+			}
 		}()
 	})
 
@@ -111,6 +115,15 @@ mux.HandleFunc("/callback", func(w http.ResponseWriter, r *http.Request) {
 	case <-time.After(5 * time.Minute):
 		return "", fmt.Errorf("timed out waiting for authorization code")
 	}
+}
+
+func generateSecureRandomString(length int) (string, error) {
+	b := make([]byte, length)
+	_, err := rand.Read(b)
+	if err != nil {
+		return "", err
+	}
+	return base64.URLEncoding.EncodeToString(b), nil
 }
 
 // --- Main Program Logic ---
@@ -156,7 +169,8 @@ func main() {
 				log.Fatalf("Failed to generate PKCE pair: %v", err)
 			}
 
-			authURL := conf.AuthCodeURL("state-token", oauth2.AccessTypeOffline,
+			state, err := generateSecureRandomString(32)
+			authURL := conf.AuthCodeURL(state, oauth2.AccessTypeOffline,
 				oauth2.SetAuthURLParam("code_challenge", challenge),
 				oauth2.SetAuthURLParam("code_challenge_method", "S256"))
 
@@ -189,7 +203,7 @@ func main() {
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatalf("Failed to read API response: %v", err)
 	}
