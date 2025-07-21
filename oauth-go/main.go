@@ -76,9 +76,10 @@ func startLocalServerAndWaitForCode(authURL string) (string, error) {
 	codeChan := make(chan string)
 	errChan := make(chan error)
 
-	server := &http.Server{Addr: ":" + redirectPort}
+mux := http.NewServeMux()
+server := &http.Server{Addr: ":" + redirectPort, Handler: mux}
 
-	http.HandleFunc("/callback", func(w http.ResponseWriter, r *http.Request) {
+mux.HandleFunc("/callback", func(w http.ResponseWriter, r *http.Request) {
 		code := r.URL.Query().Get("code")
 		if code == "" {
 			errMsg := "authorization failed: no code received"
