@@ -1,5 +1,5 @@
 module oauth-go
 
-go 1.18
+go 1.23.0
 
-require golang.org/x/oauth2 v0.20.0
+require golang.org/x/oauth2 v0.27.0
