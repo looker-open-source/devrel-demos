@@ -1,0 +1,7 @@
+oauth-go/oauth-go
+oauth-go/oauth_tokens.json
+oauth-python/bin/
+oauth-python/lib/
+oauth-python/lib64
+oauth-python/pyvenv.cfg
+
