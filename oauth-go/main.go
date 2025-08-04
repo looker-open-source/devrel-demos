@@ -11,10 +11,9 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
-	"runtime"
 	"time"
 
+	"github.com/pkg/browser"
 	"golang.org/x/oauth2"
 )
 
@@ -63,7 +62,7 @@ func loadTokens() (*oauth2.Token, error) {
 }
 
 func saveTokens(token *oauth2.Token) error {
-file, err := os.OpenFile(tokenFile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
+	file, err := os.OpenFile(tokenFile, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
 	if err != nil {
 		return err
 	}
@@ -76,10 +75,10 @@ func startLocalServerAndWaitForCode(authURL string) (string, error) {
 	codeChan := make(chan string)
 	errChan := make(chan error)
 
-mux := http.NewServeMux()
-server := &http.Server{Addr: ":" + redirectPort, Handler: mux}
+	mux := http.NewServeMux()
+	server := &http.Server{Addr: ":" + redirectPort, Handler: mux}
 
-mux.HandleFunc("/callback", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/callback", func(w http.ResponseWriter, r *http.Request) {
 		code := r.URL.Query().Get("code")
 		if code == "" {
 			errMsg := "authorization failed: no code received"
@@ -105,7 +104,9 @@ mux.HandleFunc("/callback", func(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
-	openBrowser(authURL)
+	if err := browser.OpenURL(authURL); err != nil {
+		log.Printf("Failed to open browser automatically. Please open this URL in your browser to continue: %s", authURL)
+	}
 
 	select {
 	case code := <-codeChan:
@@ -208,7 +209,7 @@ func main() {
 		log.Fatalf("Failed to read API response: %v", err)
 	}
 
-	var result map[string]interface{}
+	var result map[string]any
 	if err := json.Unmarshal(body, &result); err != nil {
 		log.Fatalf("Failed to parse API response: %v", err)
 	}
@@ -219,21 +220,4 @@ func main() {
 		log.Fatalf("Failed to generate pretty JSON: %v", err)
 	}
 	fmt.Println(string(prettyJSON))
-}
-
-func openBrowser(url string) {
-	var err error
-	switch runtime.GOOS {
-	case "linux":
-		err = exec.Command("xdg-open", url).Start()
-	case "windows":
-		err = exec.Command("rundll32", "url.dll,FileProtocolHandler", url).Start()
-	case "darwin":
-		err = exec.Command("open", url).Start()
-	default:
-		err = fmt.Errorf("unsupported platform")
-	}
-	if err != nil {
-		log.Printf("Failed to open browser: %v", err)
-	}
 }
