@@ -1,0 +1,156 @@
+campaign_name,campaign_start_date,campaign_end_date,target_region,target_country,target_category,campaign_channel,planned_budget,expected_impressions,expected_clicks,target_conversion_rate_pct,target_conversions,expected_revenue_lift,expected_roas,campaign_objective,campaign_status,owner
+New Year Tech Deals,2026-01-05,2026-01-31,North America,US,Smartphones,Social Media,18500.00,2312500,80937,3.2,2590,1483560.00,80.2,Acquisition,Completed,Sarah Chen
+New Year Tech Deals,2026-01-05,2026-01-31,North America,US,Smartphones,Paid Search,22000.00,1833333,64167,4.1,2631,1505346.00,68.4,Acquisition,Completed,Sarah Chen
+New Year Tech Deals,2026-01-05,2026-01-31,Europe West,FR,Laptops,Social Media,18500.00,1850000,55500,2.8,1554,810384.00,43.8,Acquisition,Completed,Sarah Chen
+New Year Tech Deals,2026-01-05,2026-01-31,Europe West,FR,Smartphones,Paid Search,22000.00,2444444,73333,3.5,2567,1469196.00,66.8,Acquisition,Completed,Sarah Chen
+New Year Tech Deals,2026-01-05,2026-01-31,Asia Pacific,JP,Laptops,Social Media,18500.00,2642857,92500,2.9,2682,1399566.00,75.7,Acquisition,Completed,Sarah Chen
+New Year Tech Deals,2026-01-05,2026-01-31,Asia Pacific,JP,Smartphones,Paid Search,22000.00,2000000,70000,3.8,2660,1523360.00,69.2,Acquisition,Completed,Sarah Chen
+Valentine's Gift Guide,2026-02-01,2026-02-14,North America,US,Wearables,Email,8500.00,1700000,42500,3.5,1487,294606.00,34.7,Retention,Completed,Marie Dupont
+Valentine's Gift Guide,2026-02-01,2026-02-14,North America,US,Audio,Display Ads,7200.00,900000,31500,2.6,819,108108.00,15.0,Retention,Completed,Marie Dupont
+Valentine's Gift Guide,2026-02-01,2026-02-14,Europe West,FR,Wearables,Email,8500.00,1416667,49583,3.1,1537,304326.00,35.8,Retention,Completed,Marie Dupont
+Valentine's Gift Guide,2026-02-01,2026-02-14,Europe West,FR,Audio,Display Ads,7200.00,1028571,30857,2.9,895,118140.00,16.4,Retention,Completed,Marie Dupont
+Valentine's Gift Guide,2026-02-01,2026-02-14,Europe North,GB,Wearables,Email,8500.00,1214286,42500,3.3,1402,277596.00,32.7,Retention,Completed,Marie Dupont
+Valentine's Gift Guide,2026-02-01,2026-02-14,Europe North,GB,Audio,Display Ads,7200.00,1200000,36000,2.4,864,114048.00,15.8,Retention,Completed,Marie Dupont
+Spring Gadget Refresh,2026-03-01,2026-03-31,North America,US,Tablets,Paid Search,15000.00,1875000,56250,3.4,1912,736120.00,49.1,Awareness,Completed,James Miller
+Spring Gadget Refresh,2026-03-01,2026-03-31,North America,US,Tablets,In-Store,12000.00,1500000,37500,2.1,787,303095.00,25.3,Awareness,Completed,James Miller
+Spring Gadget Refresh,2026-03-01,2026-03-31,Asia Pacific,JP,Smart Home,Paid Search,15000.00,2142857,64286,2.7,1736,382264.00,25.5,Awareness,Completed,James Miller
+Spring Gadget Refresh,2026-03-01,2026-03-31,Asia Pacific,JP,Tablets,In-Store,12000.00,1714286,51429,3.0,1543,594055.00,49.5,Awareness,Completed,James Miller
+Spring Gadget Refresh,2026-03-01,2026-03-31,Europe North,GB,Smart Home,Paid Search,15000.00,1666667,50000,3.2,1600,352000.00,23.5,Awareness,Completed,James Miller
+Spring Gadget Refresh,2026-03-01,2026-03-31,Europe North,GB,Tablets,In-Store,12000.00,1333333,40000,2.5,1000,385000.00,32.1,Awareness,Completed,James Miller
+Easter Weekend Flash Sale,2026-04-01,2026-04-06,North America,US,Gaming,Social Media,9500.00,1357143,47500,4.5,2137,987324.00,103.9,Acquisition,In Progress,Yuki Tanaka
+Easter Weekend Flash Sale,2026-04-01,2026-04-06,North America,US,Gaming,Email,7800.00,1560000,46800,3.8,1778,821316.00,105.3,Acquisition,In Progress,Yuki Tanaka
+Easter Weekend Flash Sale,2026-04-01,2026-04-06,Europe West,FR,Accessories,Social Media,9500.00,1583333,47500,3.2,1520,108680.00,11.4,Acquisition,In Progress,Yuki Tanaka
+Easter Weekend Flash Sale,2026-04-01,2026-04-06,Europe West,FR,Gaming,Email,7800.00,1300000,39000,4.1,1599,739338.00,94.8,Acquisition,In Progress,Yuki Tanaka
+Easter Weekend Flash Sale,2026-04-01,2026-04-06,Asia Pacific,JP,Gaming,Social Media,9500.00,1187500,41562,3.6,1496,691152.00,72.8,Acquisition,In Progress,Yuki Tanaka
+Easter Weekend Flash Sale,2026-04-01,2026-04-06,Asia Pacific,JP,Accessories,Email,7800.00,1114286,39000,2.9,1131,80901.00,10.4,Acquisition,In Progress,Yuki Tanaka
+Earth Day Eco-Tech,2026-04-15,2026-04-30,North America,US,Smart Home,Display Ads,28000.00,3500000,105000,2.3,2415,531300.00,19.0,Awareness,Planned,Alex Rivera
+Earth Day Eco-Tech,2026-04-15,2026-04-30,North America,US,Wearables,Social Media,32000.00,4571429,137143,3.1,4251,841698.00,26.3,Awareness,Planned,Alex Rivera
+Earth Day Eco-Tech,2026-04-15,2026-04-30,Europe West,FR,Smart Home,Display Ads,28000.00,4000000,120000,2.5,3000,660000.00,23.6,Awareness,Planned,Alex Rivera
+Earth Day Eco-Tech,2026-04-15,2026-04-30,Europe West,FR,Wearables,Social Media,32000.00,3555556,106667,2.8,2987,591426.00,18.5,Awareness,Planned,Alex Rivera
+Earth Day Eco-Tech,2026-04-15,2026-04-30,Europe North,GB,Smart Home,Display Ads,28000.00,2800000,84000,2.1,1764,388080.00,13.9,Awareness,Planned,Alex Rivera
+Earth Day Eco-Tech,2026-04-15,2026-04-30,Europe North,GB,Wearables,Social Media,32000.00,4000000,120000,3.4,4080,807840.00,25.2,Awareness,Planned,Alex Rivera
+Earth Day Eco-Tech,2026-04-15,2026-04-30,Asia Pacific,JP,Smart Home,Display Ads,28000.00,3111111,93333,2.6,2427,534042.00,19.1,Awareness,Planned,Alex Rivera
+Earth Day Eco-Tech,2026-04-15,2026-04-30,Asia Pacific,JP,Wearables,Social Media,32000.00,3200000,96000,3.0,2880,570240.00,17.8,Awareness,Planned,Alex Rivera
+Mother's Day Gifting,2026-05-01,2026-05-10,North America,US,Wearables,Social Media,6500.00,928571,27857,3.6,1003,198594.00,30.6,Upsell,Planned,Marie Dupont
+Mother's Day Gifting,2026-05-01,2026-05-10,North America,US,Audio,Email,5800.00,966667,29000,2.5,725,95700.00,16.5,Upsell,Planned,Marie Dupont
+Mother's Day Gifting,2026-05-01,2026-05-10,North America,US,Wearables,Paid Search,7200.00,900000,31500,3.2,1008,199584.00,27.7,Upsell,Planned,Marie Dupont
+Mother's Day Gifting,2026-05-01,2026-05-10,Europe West,FR,Audio,Social Media,6500.00,1083333,32500,2.8,910,120120.00,18.5,Upsell,Planned,Marie Dupont
+Mother's Day Gifting,2026-05-01,2026-05-10,Europe West,FR,Wearables,Email,5800.00,1160000,34800,3.1,1079,213642.00,36.8,Upsell,Planned,Marie Dupont
+Mother's Day Gifting,2026-05-01,2026-05-10,Europe West,FR,Audio,Paid Search,7200.00,1028571,30857,2.3,710,93720.00,13.0,Upsell,Planned,Marie Dupont
+Mother's Day Gifting,2026-05-01,2026-05-10,Europe North,GB,Wearables,Social Media,6500.00,812500,28437,3.4,967,191466.00,29.5,Upsell,Planned,Marie Dupont
+Mother's Day Gifting,2026-05-01,2026-05-10,Europe North,GB,Audio,Email,5800.00,725000,25375,2.6,659,87012.00,15.0,Upsell,Planned,Marie Dupont
+Mother's Day Gifting,2026-05-01,2026-05-10,Europe North,GB,Wearables,Paid Search,7200.00,1200000,36000,3.0,1080,213840.00,29.7,Upsell,Planned,Marie Dupont
+Summer Kickoff Sale,2026-06-01,2026-06-30,North America,US,Smartphones,In-Store,16500.00,2357143,70714,3.5,2475,1416300.00,85.8,Acquisition,Planned,Sarah Chen
+Summer Kickoff Sale,2026-06-01,2026-06-30,North America,US,Smartphones,Social Media,14000.00,2000000,70000,3.8,2660,1523360.00,108.8,Acquisition,Planned,Sarah Chen
+Summer Kickoff Sale,2026-06-01,2026-06-30,Europe West,FR,Gaming,In-Store,16500.00,1650000,49500,2.9,1435,663780.00,40.2,Acquisition,Planned,Sarah Chen
+Summer Kickoff Sale,2026-06-01,2026-06-30,Europe West,FR,Smartphones,Social Media,14000.00,1555556,46667,3.3,1540,881880.00,63.0,Acquisition,Planned,Sarah Chen
+Summer Kickoff Sale,2026-06-01,2026-06-30,Asia Pacific,JP,Gaming,In-Store,16500.00,2062500,61875,3.1,1918,887124.00,53.8,Acquisition,Planned,Sarah Chen
+Summer Kickoff Sale,2026-06-01,2026-06-30,Asia Pacific,JP,Smartphones,Social Media,14000.00,1750000,52500,3.6,1890,1082520.00,77.3,Acquisition,Planned,Sarah Chen
+Back to School,2026-07-15,2026-08-31,North America,US,Laptops,Paid Search,35000.00,3888889,116667,3.2,3733,1949228.00,55.7,Acquisition,Planned,James Miller
+Back to School,2026-07-15,2026-08-31,North America,US,Tablets,Social Media,28000.00,4000000,120000,2.7,3240,1247400.00,44.6,Acquisition,Planned,James Miller
+Back to School,2026-07-15,2026-08-31,North America,US,Laptops,Email,22000.00,3142857,94286,3.5,3300,1722600.00,78.3,Acquisition,Planned,James Miller
+Back to School,2026-07-15,2026-08-31,Europe West,FR,Laptops,Paid Search,35000.00,4375000,131250,2.9,3806,1986732.00,56.8,Acquisition,Planned,James Miller
+Back to School,2026-07-15,2026-08-31,Europe West,FR,Tablets,Social Media,28000.00,3500000,105000,3.1,3255,1253175.00,44.8,Acquisition,Planned,James Miller
+Back to School,2026-07-15,2026-08-31,Europe West,FR,Tablets,Email,22000.00,2750000,82500,2.4,1980,762300.00,34.6,Acquisition,Planned,James Miller
+Back to School,2026-07-15,2026-08-31,Europe North,GB,Laptops,Paid Search,35000.00,5000000,150000,3.4,5100,2662200.00,76.1,Acquisition,Planned,James Miller
+Back to School,2026-07-15,2026-08-31,Europe North,GB,Tablets,Social Media,28000.00,2800000,84000,2.8,2352,905520.00,32.3,Acquisition,Planned,James Miller
+Back to School,2026-07-15,2026-08-31,Europe North,GB,Laptops,Email,22000.00,2444444,73333,3.0,2200,1148400.00,52.2,Acquisition,Planned,James Miller
+Labor Day Blowout,2026-09-01,2026-09-07,North America,US,Audio,Social Media,11000.00,1571429,47143,4.2,1980,261360.00,23.8,Upsell,Planned,Yuki Tanaka
+Labor Day Blowout,2026-09-01,2026-09-07,North America,US,Accessories,Paid Search,9500.00,1357143,40714,3.0,1221,87302.00,9.2,Upsell,Planned,Yuki Tanaka
+Labor Day Blowout,2026-09-01,2026-09-07,North America,US,Audio,In-Store,8000.00,800000,28000,2.4,672,88704.00,11.1,Upsell,Planned,Yuki Tanaka
+Labor Day Blowout,2026-09-01,2026-09-07,Europe North,GB,Accessories,Social Media,11000.00,1375000,41250,2.8,1155,82582.00,7.5,Upsell,Planned,Yuki Tanaka
+Labor Day Blowout,2026-09-01,2026-09-07,Europe North,GB,Audio,Paid Search,9500.00,1187500,35625,3.5,1247,164604.00,17.3,Upsell,Planned,Yuki Tanaka
+Labor Day Blowout,2026-09-01,2026-09-07,Europe North,GB,Audio,In-Store,8000.00,1142857,34286,2.6,891,117612.00,14.7,Upsell,Planned,Yuki Tanaka
+Fall Product Launch,2026-09-15,2026-10-15,North America,US,Smartphones,Social Media,30000.00,3750000,112500,3.6,4050,2318640.00,77.3,Awareness,Planned,Alex Rivera
+Fall Product Launch,2026-09-15,2026-10-15,North America,US,Wearables,Display Ads,25000.00,3571429,107143,2.8,3000,594000.00,23.8,Awareness,Planned,Alex Rivera
+Fall Product Launch,2026-09-15,2026-10-15,Europe West,FR,Smartphones,Social Media,30000.00,3333333,100000,3.3,3300,1889160.00,63.0,Awareness,Planned,Alex Rivera
+Fall Product Launch,2026-09-15,2026-10-15,Europe West,FR,Wearables,Display Ads,25000.00,2500000,75000,3.1,2325,460350.00,18.4,Awareness,Planned,Alex Rivera
+Fall Product Launch,2026-09-15,2026-10-15,Asia Pacific,JP,Smartphones,Social Media,30000.00,4285714,128571,3.0,3857,2208608.00,73.6,Awareness,Planned,Alex Rivera
+Fall Product Launch,2026-09-15,2026-10-15,Asia Pacific,JP,Wearables,Display Ads,25000.00,3125000,93750,2.5,2344,464208.00,18.6,Awareness,Planned,Alex Rivera
+Black Friday Mega Sale,2026-11-20,2026-11-30,North America,US,Smartphones,Paid Search,22000.00,2444444,85556,4.8,4107,2349206.00,106.8,Acquisition,Planned,Sarah Chen
+Black Friday Mega Sale,2026-11-20,2026-11-30,North America,US,Laptops,Social Media,20000.00,2857143,85714,3.9,3343,1745036.00,87.3,Acquisition,Planned,Sarah Chen
+Black Friday Mega Sale,2026-11-20,2026-11-30,North America,US,Gaming,In-Store,18000.00,2571429,77143,3.5,2700,1247400.00,69.3,Acquisition,Planned,Sarah Chen
+Black Friday Mega Sale,2026-11-20,2026-11-30,Europe West,FR,Smartphones,Paid Search,22000.00,2750000,82500,4.2,3465,1982268.00,90.1,Acquisition,Planned,Sarah Chen
+Black Friday Mega Sale,2026-11-20,2026-11-30,Europe West,FR,Gaming,Social Media,20000.00,2222222,66667,3.3,2200,1017520.00,50.9,Acquisition,Planned,Sarah Chen
+Black Friday Mega Sale,2026-11-20,2026-11-30,Europe West,FR,Laptops,In-Store,18000.00,1800000,54000,2.8,1512,789264.00,43.8,Acquisition,Planned,Sarah Chen
+Black Friday Mega Sale,2026-11-20,2026-11-30,Europe North,GB,Smartphones,Paid Search,22000.00,3142857,94286,4.5,4243,2427076.00,110.3,Acquisition,Planned,Sarah Chen
+Black Friday Mega Sale,2026-11-20,2026-11-30,Europe North,GB,Laptops,Social Media,20000.00,2500000,75000,3.1,2325,1213650.00,60.7,Acquisition,Planned,Sarah Chen
+Black Friday Mega Sale,2026-11-20,2026-11-30,Europe North,GB,Gaming,In-Store,18000.00,2250000,67500,3.7,2497,1154112.00,64.1,Acquisition,Planned,Sarah Chen
+Black Friday Mega Sale,2026-11-20,2026-11-30,Asia Pacific,JP,Smartphones,Paid Search,22000.00,2200000,77000,4.0,3080,1762784.00,80.1,Acquisition,Planned,Sarah Chen
+Black Friday Mega Sale,2026-11-20,2026-11-30,Asia Pacific,JP,Gaming,Social Media,20000.00,2500000,75000,3.4,2550,1179120.00,59.0,Acquisition,Planned,Sarah Chen
+Black Friday Mega Sale,2026-11-20,2026-11-30,Asia Pacific,JP,Laptops,In-Store,18000.00,2571429,77143,2.6,2006,1047132.00,58.2,Acquisition,Planned,Sarah Chen
+Cyber Monday Deals,2026-12-01,2026-12-01,North America,US,Laptops,Paid Search,15000.00,2142857,64286,5.2,3343,1745036.00,116.3,Acquisition,Planned,Yuki Tanaka
+Cyber Monday Deals,2026-12-01,2026-12-01,North America,US,Smartphones,Email,12000.00,1714286,51429,4.5,2314,1324618.00,110.4,Acquisition,Planned,Yuki Tanaka
+Cyber Monday Deals,2026-12-01,2026-12-01,Europe West,FR,Laptops,Paid Search,15000.00,1666667,50000,4.8,2400,1252800.00,83.5,Acquisition,Planned,Yuki Tanaka
+Cyber Monday Deals,2026-12-01,2026-12-01,Europe West,FR,Smartphones,Email,12000.00,1500000,45000,4.2,1890,1082520.00,90.2,Acquisition,Planned,Yuki Tanaka
+Cyber Monday Deals,2026-12-01,2026-12-01,Asia Pacific,JP,Laptops,Paid Search,15000.00,1875000,56250,4.4,2475,1291950.00,86.1,Acquisition,Planned,Yuki Tanaka
+Cyber Monday Deals,2026-12-01,2026-12-01,Asia Pacific,JP,Smartphones,Email,12000.00,2000000,60000,3.9,2340,1339704.00,111.6,Acquisition,Planned,Yuki Tanaka
+Holiday Gift Season,2026-12-01,2026-12-24,North America,US,Wearables,Social Media,18000.00,2571429,77143,3.2,2469,488862.00,27.2,Awareness,Planned,Marie Dupont
+Holiday Gift Season,2026-12-01,2026-12-24,North America,US,Audio,Display Ads,15000.00,2142857,64286,2.6,1671,220572.00,14.7,Awareness,Planned,Marie Dupont
+Holiday Gift Season,2026-12-01,2026-12-24,North America,US,Smart Home,In-Store,12000.00,1200000,42000,2.9,1218,268044.00,22.3,Awareness,Planned,Marie Dupont
+Holiday Gift Season,2026-12-01,2026-12-24,Europe West,FR,Wearables,Social Media,18000.00,2250000,67500,3.5,2362,467676.00,26.0,Awareness,Planned,Marie Dupont
+Holiday Gift Season,2026-12-01,2026-12-24,Europe West,FR,Smart Home,Display Ads,15000.00,1875000,56250,2.4,1350,297000.00,19.8,Awareness,Planned,Marie Dupont
+Holiday Gift Season,2026-12-01,2026-12-24,Europe West,FR,Audio,In-Store,12000.00,1500000,45000,2.8,1260,166320.00,13.9,Awareness,Planned,Marie Dupont
+Holiday Gift Season,2026-12-01,2026-12-24,Europe North,GB,Wearables,Social Media,18000.00,3000000,90000,3.0,2700,534600.00,29.7,Awareness,Planned,Marie Dupont
+Holiday Gift Season,2026-12-01,2026-12-24,Europe North,GB,Audio,Display Ads,15000.00,1500000,45000,2.5,1125,148500.00,9.9,Awareness,Planned,Marie Dupont
+Holiday Gift Season,2026-12-01,2026-12-24,Europe North,GB,Smart Home,In-Store,12000.00,1714286,51429,3.1,1594,350788.00,29.2,Awareness,Planned,Marie Dupont
+End of Year Clearance,2026-12-26,2026-12-31,North America,US,Accessories,Email,5500.00,1100000,33000,3.8,1254,89661.00,16.3,Retention,Planned,Alex Rivera
+End of Year Clearance,2026-12-26,2026-12-31,North America,US,Tablets,Paid Search,7000.00,875000,30625,2.5,765,294525.00,42.1,Retention,Planned,Alex Rivera
+End of Year Clearance,2026-12-26,2026-12-31,Europe West,FR,Accessories,Email,5500.00,785714,27500,3.2,880,62920.00,11.4,Retention,Planned,Alex Rivera
+End of Year Clearance,2026-12-26,2026-12-31,Europe West,FR,Tablets,Paid Search,7000.00,1000000,30000,2.9,870,334950.00,47.9,Retention,Planned,Alex Rivera
+End of Year Clearance,2026-12-26,2026-12-31,Europe North,GB,Accessories,Email,5500.00,916667,27500,2.7,742,53053.00,9.6,Retention,Planned,Alex Rivera
+End of Year Clearance,2026-12-26,2026-12-31,Europe North,GB,Tablets,Paid Search,7000.00,777778,27222,3.4,926,356510.00,50.9,Retention,Planned,Alex Rivera
+End of Year Clearance,2026-12-26,2026-12-31,Asia Pacific,JP,Accessories,Email,5500.00,687500,24062,3.0,722,51622.00,9.4,Retention,Planned,Alex Rivera
+End of Year Clearance,2026-12-26,2026-12-31,Asia Pacific,JP,Tablets,Paid Search,7000.00,1166667,35000,2.6,910,350350.00,50.1,Retention,Planned,Alex Rivera
+Wearables Wellness Push,2026-01-10,2026-02-28,North America,US,Wearables,Social Media,20000.00,2857143,85714,3.4,2914,577172.00,28.9,Awareness,Completed,James Miller
+Wearables Wellness Push,2026-01-10,2026-02-28,North America,US,Wearables,Display Ads,16000.00,2285714,68571,2.8,1920,380160.00,23.8,Awareness,Completed,James Miller
+Wearables Wellness Push,2026-01-10,2026-02-28,Europe West,FR,Wearables,Social Media,20000.00,2500000,75000,3.1,2325,460350.00,23.0,Awareness,Completed,James Miller
+Wearables Wellness Push,2026-01-10,2026-02-28,Europe West,FR,Wearables,Display Ads,16000.00,1777778,53333,2.5,1333,263934.00,16.5,Awareness,Completed,James Miller
+Wearables Wellness Push,2026-01-10,2026-02-28,Asia Pacific,JP,Wearables,Social Media,20000.00,3333333,100000,3.6,3600,712800.00,35.6,Awareness,Completed,James Miller
+Wearables Wellness Push,2026-01-10,2026-02-28,Asia Pacific,JP,Wearables,Display Ads,16000.00,2000000,60000,2.9,1740,344520.00,21.5,Awareness,Completed,James Miller
+Gaming Championship Tie-In,2026-03-10,2026-04-10,North America,US,Gaming,Social Media,15000.00,2142857,75000,4.3,3225,1492350.00,99.5,Acquisition,In Progress,Yuki Tanaka
+Gaming Championship Tie-In,2026-03-10,2026-04-10,North America,US,Gaming,Paid Search,18000.00,2000000,70000,3.8,2660,1229336.00,68.3,Acquisition,In Progress,Yuki Tanaka
+Gaming Championship Tie-In,2026-03-10,2026-04-10,Europe West,FR,Gaming,Social Media,15000.00,1875000,56250,3.5,1969,910466.00,60.7,Acquisition,In Progress,Yuki Tanaka
+Gaming Championship Tie-In,2026-03-10,2026-04-10,Europe West,FR,Gaming,Paid Search,18000.00,2571429,77143,4.0,3086,1427368.00,79.3,Acquisition,In Progress,Yuki Tanaka
+Gaming Championship Tie-In,2026-03-10,2026-04-10,Europe North,GB,Gaming,Social Media,15000.00,1666667,50000,3.2,1600,739840.00,49.3,Acquisition,In Progress,Yuki Tanaka
+Gaming Championship Tie-In,2026-03-10,2026-04-10,Europe North,GB,Gaming,Paid Search,18000.00,2250000,67500,4.1,2767,1279372.00,71.1,Acquisition,In Progress,Yuki Tanaka
+Smart Home Awareness Week,2026-05-15,2026-05-22,North America,US,Smart Home,Display Ads,22000.00,3142857,94286,2.5,2357,518540.00,23.6,Awareness,Planned,Alex Rivera
+Smart Home Awareness Week,2026-05-15,2026-05-22,North America,US,Smart Home,In-Store,18000.00,2250000,67500,2.2,1485,326700.00,18.2,Awareness,Planned,Alex Rivera
+Smart Home Awareness Week,2026-05-15,2026-05-22,Europe West,FR,Smart Home,Display Ads,22000.00,2444444,73333,2.8,2053,451660.00,20.5,Awareness,Planned,Alex Rivera
+Smart Home Awareness Week,2026-05-15,2026-05-22,Europe West,FR,Smart Home,In-Store,18000.00,1800000,54000,2.4,1296,285120.00,15.8,Awareness,Planned,Alex Rivera
+Smart Home Awareness Week,2026-05-15,2026-05-22,Europe North,GB,Smart Home,Display Ads,22000.00,2750000,82500,2.6,2145,472110.00,21.5,Awareness,Planned,Alex Rivera
+Smart Home Awareness Week,2026-05-15,2026-05-22,Europe North,GB,Smart Home,In-Store,18000.00,2571429,77143,2.0,1543,339574.00,18.9,Awareness,Planned,Alex Rivera
+Smart Home Awareness Week,2026-05-15,2026-05-22,Asia Pacific,JP,Smart Home,Display Ads,22000.00,3666667,110000,2.3,2530,556600.00,25.3,Awareness,Planned,Alex Rivera
+Smart Home Awareness Week,2026-05-15,2026-05-22,Asia Pacific,JP,Smart Home,In-Store,18000.00,2000000,60000,2.7,1620,356400.00,19.8,Awareness,Planned,Alex Rivera
+Audio Summer Festival,2026-06-10,2026-07-10,North America,US,Audio,Social Media,12000.00,1714286,51429,3.3,1697,224004.00,18.7,Retention,Planned,Marie Dupont
+Audio Summer Festival,2026-06-10,2026-07-10,North America,US,Audio,In-Store,10000.00,1250000,37500,2.5,937,123684.00,12.4,Retention,Planned,Marie Dupont
+Audio Summer Festival,2026-06-10,2026-07-10,Europe West,FR,Audio,Social Media,12000.00,1500000,45000,2.8,1260,166320.00,13.9,Retention,Planned,Marie Dupont
+Audio Summer Festival,2026-06-10,2026-07-10,Europe West,FR,Audio,In-Store,10000.00,1428571,42857,3.0,1286,169752.00,17.0,Retention,Planned,Marie Dupont
+Audio Summer Festival,2026-06-10,2026-07-10,Asia Pacific,JP,Audio,Social Media,12000.00,2000000,60000,3.5,2100,277200.00,23.1,Retention,Planned,Marie Dupont
+Audio Summer Festival,2026-06-10,2026-07-10,Asia Pacific,JP,Audio,In-Store,10000.00,1000000,35000,2.3,805,106260.00,10.6,Retention,Planned,Marie Dupont
+Loyalty Member Exclusive,2026-08-01,2026-08-15,North America,US,Smartphones,Email,10000.00,2000000,60000,4.5,2700,1545480.00,154.5,Retention,Planned,Sarah Chen
+Loyalty Member Exclusive,2026-08-01,2026-08-15,North America,US,Wearables,Display Ads,8500.00,1214286,36429,3.0,1093,216414.00,25.5,Retention,Planned,Sarah Chen
+Loyalty Member Exclusive,2026-08-01,2026-08-15,Europe North,GB,Smartphones,Email,10000.00,1666667,50000,4.2,2100,1202040.00,120.2,Retention,Planned,Sarah Chen
+Loyalty Member Exclusive,2026-08-01,2026-08-15,Europe North,GB,Wearables,Display Ads,8500.00,1062500,31875,2.7,861,170478.00,20.1,Retention,Planned,Sarah Chen
+Loyalty Member Exclusive,2026-08-01,2026-08-15,Asia Pacific,JP,Smartphones,Email,10000.00,1428571,42857,3.8,1629,932200.00,93.2,Retention,Planned,Sarah Chen
+Loyalty Member Exclusive,2026-08-01,2026-08-15,Asia Pacific,JP,Wearables,Display Ads,8500.00,970000,29100,3.2,931,184338.00,21.7,Retention,Planned,Sarah Chen
+Student Discount Drive,2026-08-15,2026-09-15,North America,US,Laptops,Paid Search,25000.00,3125000,93750,3.6,3375,1761750.00,70.5,Acquisition,Planned,James Miller
+Student Discount Drive,2026-08-15,2026-09-15,North America,US,Tablets,Social Media,20000.00,2857143,85714,2.8,2400,924000.00,46.2,Acquisition,Planned,James Miller
+Student Discount Drive,2026-08-15,2026-09-15,Europe West,FR,Laptops,Paid Search,25000.00,2777778,83333,3.4,2833,1478828.00,59.2,Acquisition,Planned,James Miller
+Student Discount Drive,2026-08-15,2026-09-15,Europe West,FR,Tablets,Social Media,20000.00,2222222,66667,3.0,2000,770000.00,38.5,Acquisition,Planned,James Miller
+Student Discount Drive,2026-08-15,2026-09-15,Europe North,GB,Laptops,Paid Search,25000.00,3571429,107143,3.2,3429,1789938.00,71.6,Acquisition,Planned,James Miller
+Student Discount Drive,2026-08-15,2026-09-15,Europe North,GB,Tablets,Social Media,20000.00,2500000,75000,2.6,1950,750750.00,37.5,Acquisition,Planned,James Miller
+Accessories Bundle Promo,2026-10-01,2026-10-31,North America,US,Accessories,Email,8000.00,1600000,48000,3.5,1680,120120.00,15.0,Upsell,Planned,Alex Rivera
+Accessories Bundle Promo,2026-10-01,2026-10-31,North America,US,Accessories,Social Media,10000.00,1428571,50000,2.9,1450,103675.00,10.4,Upsell,Planned,Alex Rivera
+Accessories Bundle Promo,2026-10-01,2026-10-31,Europe West,FR,Accessories,Email,8000.00,1142857,40000,3.2,1280,91520.00,11.4,Upsell,Planned,Alex Rivera
+Accessories Bundle Promo,2026-10-01,2026-10-31,Europe West,FR,Accessories,Social Media,10000.00,1666667,50000,2.6,1300,92950.00,9.3,Upsell,Planned,Alex Rivera
+Accessories Bundle Promo,2026-10-01,2026-10-31,Europe North,GB,Accessories,Email,8000.00,1333333,40000,3.0,1200,85800.00,10.7,Upsell,Planned,Alex Rivera
+Accessories Bundle Promo,2026-10-01,2026-10-31,Europe North,GB,Accessories,Social Media,10000.00,1250000,43750,2.8,1225,87587.00,8.8,Upsell,Planned,Alex Rivera
+Accessories Bundle Promo,2026-10-01,2026-10-31,Asia Pacific,JP,Accessories,Email,8000.00,1000000,35000,3.3,1155,82582.00,10.3,Upsell,Planned,Alex Rivera
+Accessories Bundle Promo,2026-10-01,2026-10-31,Asia Pacific,JP,Accessories,Social Media,10000.00,1111111,38889,2.5,972,69498.00,6.9,Upsell,Planned,Alex Rivera
+Pre-Holiday Teaser,2026-11-01,2026-11-19,North America,US,Smartphones,Social Media,25000.00,3571429,107143,3.0,3214,1839212.00,73.6,Awareness,Planned,Sarah Chen
+Pre-Holiday Teaser,2026-11-01,2026-11-19,North America,US,Gaming,Display Ads,20000.00,2857143,85714,3.5,3000,1386960.00,69.3,Awareness,Planned,Sarah Chen
+Pre-Holiday Teaser,2026-11-01,2026-11-19,Europe West,FR,Smartphones,Social Media,25000.00,2777778,83333,3.3,2750,1573000.00,62.9,Awareness,Planned,Sarah Chen
+Pre-Holiday Teaser,2026-11-01,2026-11-19,Europe West,FR,Gaming,Display Ads,20000.00,2500000,75000,2.8,2100,971880.00,48.6,Awareness,Planned,Sarah Chen
+Pre-Holiday Teaser,2026-11-01,2026-11-19,Europe North,GB,Smartphones,Social Media,25000.00,3125000,93750,3.6,3375,1932540.00,77.3,Awareness,Planned,Sarah Chen
+Pre-Holiday Teaser,2026-11-01,2026-11-19,Europe North,GB,Gaming,Display Ads,20000.00,2222222,66667,3.2,2133,986452.00,49.3,Awareness,Planned,Sarah Chen
