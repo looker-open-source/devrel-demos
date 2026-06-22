@@ -96,11 +96,11 @@ load_dotenv()
 # Set up MCP server parameters to invoke the database toolbox binary
 base_dir = os.path.dirname(os.path.abspath(__file__))
 toolbox_path = os.path.abspath(os.path.join(base_dir, "../toolbox"))
-resolved_tools_path = os.path.abspath(os.path.join(base_dir, ".adk/resolved_tools.yaml"))
+tools_path = os.path.abspath(os.path.join(base_dir, "../tools.yaml"))
 
 looker_server = StdioServerParameters(
     command=toolbox_path,
-    args=["--stdio", "--tools-file", resolved_tools_path],
+    args=["--stdio", "--tools-file", tools_path],
     env={
         "LOOKER_BASE_URL": os.getenv("LOOKER_BASE_URL"),
         "LOOKER_CLIENT_ID": os.getenv("LOOKER_CLIENT_ID"),
