@@ -43,7 +43,7 @@ looker_toolset = MCPToolset(
 # - We use the highly capable `gemini-3.5-flash` model.
 # - We equip it with the `looker_toolset` configured above.
 root_agent = LlmAgent(
-    model='gemini-1.5-flash',
+    model='gemini-2.0-flash',
     name='looker_pro',
     description='A helpful assistant that connects to the Looker resources via mcp-toolbox-for-databases',
     instruction='You are a helpful assistant that helps write, edit, and improve high quality LookML files and manipulate Looker with MCP tools',
