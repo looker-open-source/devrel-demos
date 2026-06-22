@@ -115,7 +115,7 @@ looker_toolset = MCPToolset(
 
 # Define the LLM agent
 root_agent = LlmAgent(
-    model='gemini-3.5-flash',
+    model='gemini-1.5-flash',
     name='looker_pro',
     description='A helpful assistant that helps query Looker and use mcp-toolbox-for-databases',
     instruction='You are a helpful assistant that helps retrieve the user with the Looker tools available to them.',
