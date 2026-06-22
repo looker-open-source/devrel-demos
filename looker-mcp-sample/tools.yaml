@@ -1,0 +1,27 @@
+sources:
+    my-looker-source:
+        kind: looker
+        base_url: https://your-instance.looker.com
+        client_id: $LOOKER_CLIENT_ID
+        client_secret: $LOOKER_CLIENT_SECRET
+        project: your-project-name
+        location: us-east1
+        verify_ssl: true
+        timeout: 600s
+tools:
+    get_connections:
+        kind: looker-get-connections
+        source: my-looker-source
+        description: |
+          This tool retrieves a list of all database connections configured in the Looker system.
+
+          Parameters:
+          This tool takes no parameters.
+
+          Output:
+          A JSON array of objects, each representing a database connection.
+    create_dashboard: 
+        kind: looker-make-dashboard
+        source: my-looker-source
+        description: |
+          This tool creates a dashboard from a prompt. 
