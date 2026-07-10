@@ -98,11 +98,11 @@ load_dotenv()
 # Set up MCP server parameters to invoke the database toolbox binary
 base_dir = os.path.dirname(os.path.abspath(__file__))
 toolbox_path = os.path.abspath(os.path.join(base_dir, "../toolbox"))
-resolved_tools_path = os.path.abspath(os.path.join(base_dir, ".adk/resolved_tools.yaml"))
+tools_path = os.path.abspath(os.path.join(base_dir, "../tools.yaml"))
 
 looker_server = StdioServerParameters(
     command=toolbox_path,
-    args=["--stdio", "--tools-file", resolved_tools_path],
+    args=["--stdio", "--tools-file", tools_path],
     env={
         "LOOKER_BASE_URL": os.getenv("LOOKER_BASE_URL"),
         "LOOKER_CLIENT_ID": os.getenv("LOOKER_CLIENT_ID"),
@@ -117,7 +117,7 @@ looker_toolset = MCPToolset(
 
 # Define the LLM agent
 root_agent = LlmAgent(
-    model='gemini-3.5-flash',
+    model='gemini-1.5-flash',
     name='looker_pro',
     description='A helpful assistant that helps query Looker and use mcp-toolbox-for-databases',
     instruction='You are a helpful assistant that helps retrieve the user with the Looker tools available to them.',

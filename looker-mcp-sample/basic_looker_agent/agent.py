@@ -43,7 +43,22 @@ looker_server = StdioServerParameters(
     },
 )
 
+# (Optional): Uncomment this code to check for missing environment varialbes
+#
+# missing_vars = [
+#     name for name, val in {
+#         "LOOKER_CLIENT_ID": looker_client_id,
+#         "LOOKER_CLIENT_SECRET": looker_client_secret,
+#         "LOOKER_BASE_URL": looker_base_url,
+#     }.items()
+#     if not val
+# ]
+# if missing_vars:
+#     raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
+
+
 # Wrap the MCP server parameters into a Toolset that the ADK agent can use.
+
 looker_toolset = MCPToolset(
     connection_params=StdioConnectionParams(server_params=looker_server)
 )
