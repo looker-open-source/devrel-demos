@@ -2,6 +2,8 @@
 
 A step-by-step guide to building a basic AI agent utilizing the Google Agent Development Kit (ADK) and Model Context Protocol (MCP) to interact with Looker connection.
 
+## Phase 1: Basic Looker Agent Setup
+
 ---
 
 ## 1. Secure Looker API Credentials
@@ -137,3 +139,77 @@ adk web
 2. Ask the agent: *"What tools do you have available to you?"*
 3. Verify the agent lists `get_connections`.
 4. (Optional) To expand capabilities, add another Looker specific tool under the `tools` key in `tools.yaml`, restart the server using `adk web`, and test again.
+
+---
+
+## Phase 2: Analytics & Orchestration
+
+In this phase, we add the **BigQuery Agent Analytics Plugin** to track performance and wrap the agent in an **App class** for better orchestration.
+
+### 1. Google Cloud Configuration
+
+To use BigQuery analytics, you must configure your Google Cloud environment:
+
+1.  **Enable the BigQuery API:** Go to the Google Cloud Console and enable the BigQuery API for your project.
+2.  **Assign IAM Roles:** Ensure your user account or service account has the following roles:
+    *   `bigquery.jobuser` (`roles/bigquery.jobUser`): To run the jobs that log data.
+    *   `bigquery.dataeditor` (`roles/bigquery.dataEditor`): To create the analytics dataset and tables.
+3.  **Local Authentication:** Run the following command to authenticate your local terminal with Google Cloud:
+    ```bash
+    gcloud auth application-default login
+    ```
+4.  **Install Cloud Dependencies:**
+    ```bash
+    pip install google-cloud-bigquery
+    ```
+5.  **Environment Variable:** Add your Project ID to your `.env` file:
+    ```bash
+    GOOGLE_CLOUD_PROJECT="your-google-cloud-project-id"
+    ```
+
+### 2. Update `agent.py` with Analytics and the App Class
+
+Modify your `agent.py` to import the plugin and the `App` class, then wrap your `root_agent`.
+
+```python
+import os
+from dotenv import load_dotenv
+from mcp import StdioServerParameters
+from google.adk.agents import LlmAgent
+from google.adk.tools import MCPToolset
+from google.adk.tools.mcp_tool.mcp_session_manager import StdioConnectionParams
+# New imports for Phase 2
+from google.adk.plugins.bigquery_agent_analytics_plugin import BigQueryAgentAnalyticsPlugin
+from google.adk.apps import App
+
+load_dotenv()
+
+# ... (Keep looker_server and looker_toolset setup from Phase 1) ...
+
+root_agent = LlmAgent(
+    model='gemini-1.5-flash',
+    name='looker_pro',
+    description='Looker assistant',
+    instruction='You are a helpful assistant that helps manipulate Looker with MCP tools.',
+    tools=[looker_toolset],
+)
+
+# --- NEW IN PHASE 2 ---
+
+# 1. Initialize the BigQuery Analytics Plugin
+# This will automatically create a dataset (e.g., 'looker_agent_analytics') to log interactions.
+analytics_plugin = BigQueryAgentAnalyticsPlugin(
+    project_id=os.getenv("GOOGLE_CLOUD_PROJECT"),
+    dataset_id="looker_agent_analytics",
+)
+
+# 2. Wrap your agent in an App
+app = App(
+    name="LookerAgentApp",
+    root_agent=root_agent,
+    plugins=[analytics_plugin],
+)
+```
+
+### What is the `App` Class?
+The `App` class is the top-level orchestrator in the Google ADK. While an `LlmAgent` handles the logic of a single assistant, the `App` manages the entire application lifecycle. It acts as a central hub that automatically hooks your plugins (like BigQuery analytics) into the agent's execution flow. This ensures that every prompt and response is logged without you having to write custom logging code inside your agent's tools or logic.
